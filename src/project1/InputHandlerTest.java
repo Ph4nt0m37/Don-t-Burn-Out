@@ -28,6 +28,103 @@ public class InputHandlerTest
 
         assertEquals("Hello World", result);
     }
+    
+    /**
+     * Tests getUserInput() when the user enters a valid answer.
+     */
+    public void testGetUserInputValidAnswer()
+    {
+        InputHandler.scanner = new Scanner(
+            new ByteArrayInputStream("yes\n".getBytes()));
+
+        String[] validAnswers = {"yes", "no"};
+
+        String result = InputHandler.getUserInput(
+            "Enter yes or no: ",
+            validAnswers,
+            "Invalid answer");
+
+        assertEquals("yes", result);
+    }
+
+
+    /**
+     * Tests getUserInput() when the user enters another valid answer.
+     */
+    public void testGetUserInputSecondValidAnswer()
+    {
+        InputHandler.scanner = new Scanner(
+            new ByteArrayInputStream("no\n".getBytes()));
+
+        String[] validAnswers = {"yes", "no"};
+
+        String result = InputHandler.getUserInput(
+            "Enter yes or no: ",
+            validAnswers,
+            "Invalid answer");
+
+        assertEquals("no", result);
+    }
+
+
+    /**
+     * Tests getUserInput() when the user enters an invalid answer
+     * before entering a valid answer.
+     */
+    public void testGetUserInputInvalidThenValid()
+    {
+        InputHandler.scanner = new Scanner(
+            new ByteArrayInputStream("maybe\nyes\n".getBytes()));
+
+        String[] validAnswers = {"yes", "no"};
+
+        String result = InputHandler.getUserInput(
+            "Enter yes or no: ",
+            validAnswers,
+            "Invalid answer");
+
+        assertEquals("yes", result);
+    }
+
+
+    /**
+     * Tests getUserInput() with multiple invalid answers
+     * before entering a valid answer.
+     */
+    public void testGetUserInputMultipleInvalidAnswers()
+    {
+        InputHandler.scanner = new Scanner(
+            new ByteArrayInputStream(
+                "maybe\nperhaps\nhello\nno\n".getBytes()));
+
+        String[] validAnswers = {"yes", "no"};
+
+        String result = InputHandler.getUserInput(
+            "Enter yes or no: ",
+            validAnswers,
+            "Invalid answer");
+
+        assertEquals("no", result);
+    }
+
+
+    /**
+     * Tests getUserInput() with multiple valid answers.
+     */
+    public void testGetUserInputDifferentValidAnswers()
+    {
+        InputHandler.scanner = new Scanner(
+            new ByteArrayInputStream("apple\n".getBytes()));
+
+        String[] validAnswers = {"apple", "banana", "orange"};
+
+        String result = InputHandler.getUserInput(
+            "Choose a fruit: ",
+            validAnswers,
+            "Invalid fruit");
+
+        assertEquals("apple", result);
+    }
 
 
     /**

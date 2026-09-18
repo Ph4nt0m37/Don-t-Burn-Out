@@ -1,13 +1,25 @@
 package project1;
-import java.util.Scanner;
+import java.util.*;
 
 public class InputHandler
 {
-    public static Scanner scanner;
+    public static Scanner scanner = new Scanner(System.in);
 
     public static String getUserInput(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine();
+    }
+    
+    public static String getUserInput(String prompt, String[] validAnswers, String errorMessage) {
+        ArrayList<String> validAnswersList = new ArrayList<>(Arrays.asList(validAnswers));
+        while (true) {
+            System.out.print(prompt);
+            String resp = scanner.nextLine();
+            if (validAnswersList.contains(resp)) {
+                return resp;
+            }
+            System.out.println(errorMessage);
+        }
     }
     
 //    public static <T extends Number> getUserInput(String prompt, T acceptableType, String errorMessage) {
