@@ -1,5 +1,5 @@
 package project1;
-package java.uti.*;
+import java.util.*;
 
 public class Order
 {
@@ -25,6 +25,10 @@ public class Order
 
     public int getFulfillOrderAmount() {
         return fulfillOrderAmount;
+    }
+    
+    public void setFulfillOrderAmount(int amount) {
+        this.fulfillOrderAmount = amount;
     }
 
     public int getOrderValue() {

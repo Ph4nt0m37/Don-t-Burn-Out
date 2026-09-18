@@ -1,6 +1,5 @@
 package project1;
-import project1.InputHandler;
-import project1.User;
+import project1.*;
 public class GameManager
 {
     //Setup
@@ -8,7 +7,7 @@ public class GameManager
     private static String subject;
     private static int maxWrongAnswers;
     //private OrderHandler orderHandler = new OrderHandler();
-    private int questionDifficulty = 0;
+    private static int questionDifficulty = 0;
     
     public static void main(String[] args) {
         System.out.println("Hello! Welcome to Don't Burn Out.");
@@ -25,6 +24,25 @@ public class GameManager
         System.out.println("\nWell would you look at the time! You restaurant is just about to open!\nGood Luck!");
         
         //ask question/start game loop.
+        orderHandler.nextQuestion();
+        while (user.getNumFailedQuestions()<=maxWrongAnswers) {
+            Order currentOrder = orderHandler.generateOrder(questionDifficulty);
+            System.out.println("A customer wants a(n) "+currentOrder.getOrderType()+".");
+            while (currentOrder.getFulfillOrderAmount()>0) {
+                System.out.println("You need to answer "+currentOrder.getFulfillOrderAmount()+" more questions to fulfill this order.");
+                String answer = InputHandler.getUserInput(orderHandler.getCurrentQuestion()+"\n");
+                if (answer.equalsIgnoreCase(orderHandler.getCurrentQuestionAnswer())) {
+                    currentOrder.setFulfillOrderAmount(currentOrder.getFulfillOrderAmount()-1);
+                    System.out.println("Correct! You just got $"+currentOrder.getOrderValue()+".");
+                    orderHandler.nextQuestion();
+                }else {
+                    user.setNumFailedQuestions(user.getNumFailedQuestions()+1);
+                    System.out.println("Incorrect! You can get "+(maxWrongAnswers-user.getNumFailedQuestions())+" more questions wrong before the game ends.");
+                    if (user.getNumFailedQuestions()<=maxWrongAnswers) break;
+                }
+            }
+            currentOrder = orderHandler.generateOrder(questionDifficulty);
+        }
     }
 
 }
