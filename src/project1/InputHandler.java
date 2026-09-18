@@ -11,12 +11,11 @@ public class InputHandler
     }
     
     public static String getUserInput(String prompt, String[] validAnswers, String errorMessage) {
-        ArrayList<String> validAnswersList = new ArrayList<>(Arrays.asList(validAnswers));
         while (true) {
             System.out.print(prompt);
             String resp = scanner.nextLine();
-            if (validAnswersList.contains(resp)) {
-                return resp;
+            for (String validAnswer:validAnswers) {
+                if (validAnswer.equalsIgnoreCase(resp)) return resp;
             }
             System.out.println(errorMessage);
         }
