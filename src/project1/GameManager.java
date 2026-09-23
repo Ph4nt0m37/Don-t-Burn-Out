@@ -6,7 +6,7 @@ public class GameManager
     private static User user;
     private static String subject;
     private static int maxWrongAnswers;
-    //private OrderHandler orderHandler = new OrderHandler();
+    private static OrderHandler orderHandler = new OrderHandler();
     private static int questionDifficulty = 0;
     
     public static void main(String[] args) {
@@ -16,6 +16,7 @@ public class GameManager
         
         System.out.println("Hello, "+name+"!\nWhat subject would you like to study today?");
         subject = InputHandler.getUserInput("Please choose a subject:\nEnglish\nMath\nScience\n",new String[]{"English","Math","Science"},"This is not a valid subject!");
+        orderHandler.setSubject(subject);
         
         System.out.println("Alright, "+subject+ " it is!\n");
         maxWrongAnswers = InputHandler.getUserIntInput("How many questions should you be able to\nget wrong before ending the game? (0-99) ",0,99,"This is not a valid input! Please enter a number between 0 and 99.");
@@ -24,11 +25,11 @@ public class GameManager
         System.out.println("\nWell would you look at the time! You restaurant is just about to open!\nGood Luck!");
         
         //ask question/start game loop.
-        orderHandler.nextQuestion();
         while (user.getNumFailedQuestions()<=maxWrongAnswers) {
             Order currentOrder = orderHandler.generateOrder(questionDifficulty);
             System.out.println("A customer wants a(n) "+currentOrder.getOrderType()+".");
-            while (currentOrder.getFulfillOrderAmount()>0) {
+            orderHandler.nextQuestion();
+            while (currentOrder.getFulfillOrderAmount()>0 && user.getNumFailedQuestions()<=maxWrongAnswers) {
                 System.out.println("You need to answer "+currentOrder.getFulfillOrderAmount()+" more questions to fulfill this order.");
                 String answer = InputHandler.getUserInput(orderHandler.getCurrentQuestion()+"\n");
                 if (answer.equalsIgnoreCase(orderHandler.getCurrentQuestionAnswer())) {
@@ -37,8 +38,12 @@ public class GameManager
                     orderHandler.nextQuestion();
                 }else {
                     user.setNumFailedQuestions(user.getNumFailedQuestions()+1);
-                    System.out.println("Incorrect! You can get "+(maxWrongAnswers-user.getNumFailedQuestions())+" more questions wrong before the game ends.");
-                    if (user.getNumFailedQuestions()<=maxWrongAnswers) break;
+                    if (maxWrongAnswers-user.getNumFailedQuestions() >= 0) {
+                        System.out.println("Incorrect! The correct answer is: "+orderHandler.getCurrentQuestionAnswer()+". You can get "+(maxWrongAnswers-user.getNumFailedQuestions())+" more questions wrong before the game ends.");
+                    }
+                    else {
+                        System.out.println("Incorrect! The correct answer is: "+orderHandler.getCurrentQuestionAnswer()+". The game is now over.");
+                    }
                 }
             }
             currentOrder = orderHandler.generateOrder(questionDifficulty);

@@ -7,12 +7,14 @@ public class Order
     private long orderTime;
     private int fulfillOrderAmount;
     private int orderValue;
+    private int questionDifficulty;
 
-    public Order(String orderType, long orderTime, int fulfillOrderAmount, int orderValue) {
+    public Order(String orderType, long orderTime, int fulfillOrderAmount, int orderValue, int questionDifficulty) {
         this.orderType = orderType;
         this.orderTime = orderTime;
         this.fulfillOrderAmount = fulfillOrderAmount;
         this.orderValue = orderValue;
+        this.questionDifficulty = questionDifficulty;
     }
 
     public String getOrderType() {
@@ -33,5 +35,9 @@ public class Order
 
     public int getOrderValue() {
         return orderValue;
+    }
+    
+    public int getQuestionDifficulty() {
+        return questionDifficulty;
     }
 }
