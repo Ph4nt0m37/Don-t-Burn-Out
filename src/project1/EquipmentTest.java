@@ -6,7 +6,7 @@ public class EquipmentTest extends TestCase
     private Equipment equipment;
     
     /**
-     * Sets up an OrderHandler before each test.
+     * Sets up an Equipment before each test.
      */
     public void setUp()
     {
@@ -15,7 +15,7 @@ public class EquipmentTest extends TestCase
 
     
     /**
-     * Tests getting the value.
+     * Tests getting the perk value.
      */
     public void testGetValue()
     {
