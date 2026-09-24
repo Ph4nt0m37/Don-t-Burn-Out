@@ -348,7 +348,7 @@ public class OrderHandler
         {
             orderType = "sandwich";
         }
-        if (rand < 0.3)
+        else if (rand < 0.3)
         {
             orderType = "pasta";
         }
@@ -356,7 +356,7 @@ public class OrderHandler
         {
             orderType = "chicken";
         }
-        if (rand < 0.5)
+        else if (rand < 0.5)
         {
             orderType = "steak";
         }
@@ -364,7 +364,7 @@ public class OrderHandler
         {
             orderType = "burger";
         }
-        if (rand < 0.7)
+        else if (rand < 0.7)
         {
             orderType = "hot dog";
         }
@@ -372,7 +372,7 @@ public class OrderHandler
         {
             orderType = "taco";
         }
-        if (rand < 0.9)
+        else if (rand < 0.9)
         {
             orderType = "burrito";
         }
@@ -418,7 +418,7 @@ public class OrderHandler
 
         if (currentOrder.getQuestionDifficulty() >= 2)
         {
-            // easy questions: 0–32
+            // hard questions: 66–99
             start = 66;
             end = 99;
         }
@@ -430,7 +430,7 @@ public class OrderHandler
         }
         else
         {
-            // hard questions: 66–99
+            // easy questions: 0-32
             start = 0;
             end = 32;
         }
