@@ -348,7 +348,7 @@ public class OrderHandler
         {
             orderType = "sandwich";
         }
-        if (rand < 0.3)
+        else if (rand < 0.3)
         {
             orderType = "pasta";
         }
@@ -356,7 +356,7 @@ public class OrderHandler
         {
             orderType = "chicken";
         }
-        if (rand < 0.5)
+        else if (rand < 0.5)
         {
             orderType = "steak";
         }
@@ -364,7 +364,7 @@ public class OrderHandler
         {
             orderType = "burger";
         }
-        if (rand < 0.7)
+        else if (rand < 0.7)
         {
             orderType = "hot dog";
         }
@@ -372,7 +372,7 @@ public class OrderHandler
         {
             orderType = "taco";
         }
-        if (rand < 0.9)
+        else if (rand < 0.9)
         {
             orderType = "burrito";
         }
