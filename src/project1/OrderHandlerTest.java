@@ -5,6 +5,9 @@ public class OrderHandlerTest extends TestCase
 {
     private OrderHandler handler;
 
+    /**
+     * Sets up an OrderHandler before each test.
+     */
     public void setUp() {
         handler = new OrderHandler();
     }

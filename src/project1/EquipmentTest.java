@@ -1,0 +1,32 @@
+package project1;
+import student.testCase;
+
+public class EquipmentTest extends TestCase
+{
+    private Equipment equipment;
+    
+    /**
+     * Sets up an OrderHandler before each test.
+     */
+    public void setUp()
+    {
+        equipment = new Equipment(20, "Increases order value");
+    }
+
+    
+    /**
+     * Tests getting the value.
+     */
+    public void testGetValue()
+    {
+        assertEquals(20, equipment.getValue());
+    }
+    
+    /**
+     * Tests getting the perk description.
+     */
+    public void testGetPerkDescription()
+    {
+        assertEquals("Increases order value", equipment.getValue());
+    }
+}
