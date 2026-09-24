@@ -72,16 +72,16 @@ public class GameManager
             System.out.println("A customer wants a(n) "+currentOrder.getOrderType()+".");
             orderHandler.nextQuestion();
             while (currentOrder.getFulfillOrderAmount()>0 && user.getNumFailedQuestions()<=maxWrongAnswers) {
-                System.out.println("You need to answer "+currentOrder.getFulfillOrderAmount()+" more questions to fulfill this order. Q: "+questionDifficulty);
+                System.out.println("You need to answer "+currentOrder.getFulfillOrderAmount()+" more questions to fulfill this order.");
                 String answer = InputHandler.getUserInput(orderHandler.getCurrentQuestion()+"\n");
                 if (answer.equalsIgnoreCase(orderHandler.getCurrentQuestionAnswer())) {
                     currentOrder.setFulfillOrderAmount(currentOrder.getFulfillOrderAmount()-1);
                     System.out.println("Correct! You just got $"+currentOrder.getOrderValue()+".");
                 }else {
                     user.setNumFailedQuestions(user.getNumFailedQuestions()+1);
-                    orderHandler.nextQuestion();
                     if (maxWrongAnswers-user.getNumFailedQuestions() >= 0) {
                         System.out.println("Incorrect! The correct answer is: "+orderHandler.getCurrentQuestionAnswer()+". You can get "+(maxWrongAnswers-user.getNumFailedQuestions())+" more questions wrong before the game ends.");
+                        orderHandler.nextQuestion();
                     }
                     else {
                         System.out.println("Incorrect! The correct answer is: "+orderHandler.getCurrentQuestionAnswer()+". The game is now over.");
