@@ -331,6 +331,14 @@ public class OrderHandler
         "Repetition", "Motif", "Archetype", "Consciousness", "Unreliable",
         "Intertextuality", "Allusion" };
 
+    private CustomQuestionHandler customQuestionHandler;
+    
+    public OrderHandler() {}
+    
+    public OrderHandler(CustomQuestionHandler questionHandler) {
+        this.customQuestionHandler = questionHandler;
+    }
+    
     public Order generateOrder(int questionDifficulty)
     {
         String orderType;
@@ -451,6 +459,10 @@ public class OrderHandler
         {
             currentQuestion = englishQuestionBank[index];
             currentAnswer = englishAnswerBank[index];
+        }else if (subject.equalsIgnoreCase("Custom")) {
+            String[] qAndA = customQuestionHandler.getQuestionAndAnswer(currentOrder.getQuestionDifficulty());
+            currentQuestion = qAndA[0];
+            currentAnswer = qAndA[1];
         }
     }
 

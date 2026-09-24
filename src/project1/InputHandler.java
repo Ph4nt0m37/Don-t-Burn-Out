@@ -40,4 +40,18 @@ public class InputHandler
             }
         }
     }
+    
+    public static boolean getUserBoolInput(String prompt, String errorMessage) {
+        while (true) {
+            System.out.print(prompt);
+            String resp = scanner.nextLine();
+            for (String validYesAnswer:new String[]{"Yes","Y"}) {
+                if (validYesAnswer.equalsIgnoreCase(resp)) return true;
+            }
+            for (String validYesAnswer:new String[]{"No","N"}) {
+                if (validYesAnswer.equalsIgnoreCase(resp)) return false;
+            }
+            System.out.println(errorMessage);
+        }
+    }
 }

@@ -1,0 +1,14 @@
+~|~ Easy Questions
+What is 1+1?|2
+What is 2+2?|4
+What is 5*0?|0
+
+~|~ Medium Questions
+What is 5*5?|25
+What is 2^4?|16
+What is x in 3x=9?|3
+
+~|~ Hard Questions
+What is 4%5?|4
+What is the derivative of x^2?|2x
+Does P=NP?|Unknown
