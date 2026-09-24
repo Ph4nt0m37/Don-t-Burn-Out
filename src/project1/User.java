@@ -2,8 +2,12 @@ package project1;
 public class User
 {
     private String playerName;
-    private int money;
-    private int wrongAnswers;
+    private int money = 0;
+    private int wrongAnswers = 0;
+    
+    public User(String name) {
+        this.playerName = name;
+    }
 
     public int getMoney() {
         return money;
