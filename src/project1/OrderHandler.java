@@ -183,18 +183,17 @@ public class OrderHandler
         "Mercury", "Mars", "Jupiter", "Oxygen", "Carbon dioxide", "Water",
         "Nucleus", "Gravity", "Heart", "Lungs", "Cell", "Moon", "206", "100",
         "0", "Sun", "Photosynthesis", "Roots", "Skin", "Solar energy",
-        "Herbivores", "Carnivores", "O", "Au", "8", "Crust",
-        "Evaporation", "Condensation", "Melting", "Freezing", "Thermometer",
-        "Barometer", "Nitrogen",
+        "Herbivores", "Carnivores", "O", "Au", "8", "Crust", "Evaporation",
+        "Condensation", "Melting", "Freezing", "Thermometer", "Barometer",
+        "Nitrogen",
 
         // medium — 33 to 65
 
-        "Na", "K", "Seven", "Electron", "Proton", "Neutron",
-        "Mitochondria", "Nucleus", "Mitosis", "DNA", "Oxygen",
-        "Fight infection", "Newton", "Joule", "Watt", "Velocity",
-        "Acceleration", "Covalent", "Ionic", "6", "8", "Carbon dioxide",
-        "Sodium chloride", "Ecosystem", "Food chain", "Decomposers",
-        "Biodiversity",
+        "Na", "K", "Seven", "Electron", "Proton", "Neutron", "Mitochondria",
+        "Nucleus", "Mitosis", "DNA", "Oxygen", "Fight infection", "Newton",
+        "Joule", "Watt", "Velocity", "Acceleration", "Covalent", "Ionic", "6",
+        "8", "Carbon dioxide", "Sodium chloride", "Ecosystem", "Food chain",
+        "Decomposers", "Biodiversity",
 
         // hard — 66 to 99
 
@@ -332,15 +331,15 @@ public class OrderHandler
         "Repetition", "Motif", "Archetype", "Consciousness", "Unreliable",
         "Intertextuality", "Allusion" };
 
-    
-    public Order generateOrder(int questionDifficulty) {
+    public Order generateOrder(int questionDifficulty)
+    {
         String orderType;
         long orderTime = 0;
         int fulfillOrderAmount = 0;
         int orderValue = 0;
-        
+
         double rand = Math.random();
-        
+
         if (rand < 0.1)
         {
             orderType = "pizza";
@@ -381,7 +380,6 @@ public class OrderHandler
         {
             orderType = "fries";
         }
-       
 
         if (questionDifficulty == 0)
         {
@@ -402,8 +400,12 @@ public class OrderHandler
             orderValue = 30;
         }
 
-        currentOrder =
-            new Order(orderType, orderTime, fulfillOrderAmount, orderValue, questionDifficulty);
+        currentOrder = new Order(
+            orderType,
+            orderTime,
+            fulfillOrderAmount,
+            orderValue,
+            questionDifficulty);
 
         return currentOrder;
     }
@@ -414,11 +416,11 @@ public class OrderHandler
         int start;
         int end;
 
-        if (currentOrder.getQuestionDifficulty() == 0)
+        if (currentOrder.getQuestionDifficulty() >= 2)
         {
             // easy questions: 0–32
-            start = 0;
-            end = 32;
+            start = 66;
+            end = 99;
         }
         else if (currentOrder.getQuestionDifficulty() == 1)
         {
@@ -429,8 +431,8 @@ public class OrderHandler
         else
         {
             // hard questions: 66–99
-            start = 66;
-            end = 99;
+            start = 0;
+            end = 32;
         }
 
         int index = start + (int)(Math.random() * (end - start + 1));

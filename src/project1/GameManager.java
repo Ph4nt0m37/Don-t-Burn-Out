@@ -24,11 +24,18 @@ public class GameManager
         System.out.println("Ok, you can get "+maxWrongAnswers+" questions wrong\nbefore the game ends.");
         System.out.println("\nWell would you look at the time! You restaurant is just about to open!\nGood Luck!");
         
+        int numQuestionsAsked = 0;
+        
         //ask question/start game loop.
         while (user.getNumFailedQuestions()<=maxWrongAnswers) {
             Order currentOrder = orderHandler.generateOrder(questionDifficulty);
             System.out.println("A customer wants a(n) "+currentOrder.getOrderType()+".");
             orderHandler.nextQuestion();
+            numQuestionsAsked++;
+            if (questionDifficulty < 2 && numQuestionsAsked % Math.max(5, maxWrongAnswers) == 0) {
+                questionDifficulty++;
+                System.out.println("Question Difficulty Increased!");
+            }
             while (currentOrder.getFulfillOrderAmount()>0 && user.getNumFailedQuestions()<=maxWrongAnswers) {
                 System.out.println("You need to answer "+currentOrder.getFulfillOrderAmount()+" more questions to fulfill this order.");
                 String answer = InputHandler.getUserInput(orderHandler.getCurrentQuestion()+"\n");
@@ -38,6 +45,7 @@ public class GameManager
                     orderHandler.nextQuestion();
                 }else {
                     user.setNumFailedQuestions(user.getNumFailedQuestions()+1);
+                    orderHandler.nextQuestion();
                     if (maxWrongAnswers-user.getNumFailedQuestions() >= 0) {
                         System.out.println("Incorrect! The correct answer is: "+orderHandler.getCurrentQuestionAnswer()+". You can get "+(maxWrongAnswers-user.getNumFailedQuestions())+" more questions wrong before the game ends.");
                     }
