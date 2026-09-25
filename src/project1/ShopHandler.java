@@ -4,37 +4,47 @@ import java.util.ArrayList;
 
 public class ShopHandler
 {
-    private ArrayList<Equipment> userEquipment;
+    private Equipment userEquipment = Equipment.STOVE100;
     private User user;
 
     public ShopHandler(User user)
     {
         this.user = user;
-        userEquipment = new ArrayList<Equipment>();
     }
 
-    public void purchaseItem(Equipment equipment)
+    public boolean purchaseItem(Equipment equipment)
     {
         if (equipment != null
             && user.getMoney() >= equipment.getValue())
         {
             user.setMoney(user.getMoney() - equipment.getValue());
-            userEquipment.add(equipment);
+            userEquipment = equipment;
+            return true;
+        }else {
+            return false;
         }
     }
 
-    public boolean hasEquipment(Equipment equipment)
-    {
-        return userEquipment.contains(equipment);
-    }
-
-    public int getEquipmentCount()
-    {
-        return userEquipment.size();
-    }
-
-    public ArrayList<Equipment> getUserEquipment()
+    public Equipment getUserEquipment()
     {
         return userEquipment;
+    }
+    
+    public void printShop() {
+        Equipment nextEquipment = Equipment.equipmentOrder.get(Equipment.equipmentOrder.indexOf(getUserEquipment()) + 1);
+        
+        System.out.println("Current equipment: "+userEquipment.toString());
+        System.out.println("Next Equipment: "+nextEquipment.toString()+" - "+nextEquipment.getPerkDescription());
+        System.out.println("Price: $"+nextEquipment.getValue());
+        System.out.println("Your Money: $"+user.getMoney());
+        
+        boolean purchasedEquipment = InputHandler.getUserBoolInput("Would you like to purchase this equipment? (Y/N) ","That is not a valid option!");
+        if (purchasedEquipment) {
+            if (purchaseItem(nextEquipment)) {
+                System.out.println("Successfully purchased "+nextEquipment.toString()+"!");
+            }else {
+                System.out.println("You do not have enough money to purchase this item!\nPlease try again when you have enough money.");
+            }
+        }
     }
 }

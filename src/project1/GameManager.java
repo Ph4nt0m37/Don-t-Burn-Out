@@ -10,11 +10,13 @@ public class GameManager
     private static OrderHandler orderHandler;
     private static CustomQuestionHandler customQuestionHandler = null;
     private static int questionDifficulty = 0;
+    private static ShopHandler shopHandler;
     
     public static void main(String[] args) {
         System.out.println("Hello! Welcome to Don't Burn Out.");
         String name = InputHandler.getUserInput("What is your name? ");
         user = new User(name);
+        shopHandler = new ShopHandler(user);
         
         System.out.println("Hello, "+name+"!");
         boolean loadCustomQuestions = InputHandler.getUserBoolInput("Would you like to load custom questions from questions.txt? (Y/N) ","This is not a valid input!");
@@ -42,12 +44,12 @@ public class GameManager
                 }
                 System.exit(0);
             }
-            orderHandler = new OrderHandler(customQuestionHandler);
+            orderHandler = new OrderHandler(customQuestionHandler, shopHandler);
             subject = "custom";
             orderHandler.setSubject(subject);
             System.out.println("Questions successfully loaded!");
         }else {
-            orderHandler = new OrderHandler();
+            orderHandler = new OrderHandler(shopHandler);
             System.out.println("Hello, "+name+"!\nWhat subject would you like to study today?");
             subject = InputHandler.getUserInput("Please choose a subject:\nEnglish\nMath\nScience\n",new String[]{"English","Math","Science"},"This is not a valid subject!");
             orderHandler.setSubject(subject);
@@ -68,7 +70,8 @@ public class GameManager
         int numOrdersCompleted = 0;
         while (user.getNumFailedQuestions()<=maxWrongAnswers) {
             if (numOrdersCompleted % 5 == 0 && numOrdersCompleted != 0) {
-                //System.out.println("")
+                System.out.println("Would you like to purchase anything from the shop?");
+                shopHandler.printShop();
             }
             if (questionDifficulty < 2 && numOrdersCompleted % Math.max(5, maxWrongAnswers) == 0 && numOrdersCompleted!=0) {
                 questionDifficulty++;
@@ -81,13 +84,14 @@ public class GameManager
                 System.out.println("You need to answer "+currentOrder.getFulfillOrderAmount()+" more questions to fulfill this order.");
                 long startTime = System.currentTimeMillis();
                 String answer = InputHandler.getUserInput(orderHandler.getCurrentQuestion()+"\n");
-                if (System.currentTimeMillis() - startTime > currentOrder.getOrderTime()) {
+                if (System.currentTimeMillis() - startTime > (currentOrder.getOrderTime() * 1000)) {
                     System.out.println("You took too long to answer the question so the customer left!");
                     break;
                 }
                 if (answer.equalsIgnoreCase(orderHandler.getCurrentQuestionAnswer())) {
                     currentOrder.setFulfillOrderAmount(currentOrder.getFulfillOrderAmount()-1);
                     System.out.println("Correct! You just got $"+currentOrder.getOrderValue()+".");
+                    user.setMoney(user.getMoney() + currentOrder.getOrderValue());
                 }else {
                     user.setNumFailedQuestions(user.getNumFailedQuestions()+1);
                     if (maxWrongAnswers-user.getNumFailedQuestions() >= 0) {

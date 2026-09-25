@@ -332,11 +332,15 @@ public class OrderHandler
         "Intertextuality", "Allusion" };
 
     private CustomQuestionHandler customQuestionHandler;
+    private ShopHandler shopHandler;
     
-    public OrderHandler() {}
+    public OrderHandler(ShopHandler shopHandler) {
+        this.shopHandler = shopHandler;
+    }
     
-    public OrderHandler(CustomQuestionHandler questionHandler) {
+    public OrderHandler(CustomQuestionHandler questionHandler, ShopHandler shopHandler) {
         this.customQuestionHandler = questionHandler;
+        this.shopHandler = shopHandler;
     }
     
     public Order generateOrder(int questionDifficulty)
@@ -391,19 +395,19 @@ public class OrderHandler
 
         if (questionDifficulty == 0)
         {
-            orderTime = 60;
+            orderTime = (long) (60 * shopHandler.getUserEquipment().getTimeMult());
             fulfillOrderAmount = 1;
             orderValue = 10;
         }
         else if (questionDifficulty == 1)
         {
-            orderTime = 50;
+            orderTime = (long) (50 * shopHandler.getUserEquipment().getTimeMult());
             fulfillOrderAmount = 2;
             orderValue = 20;
         }
         else
         {
-            orderTime = 40;
+            orderTime = (long) (40 * shopHandler.getUserEquipment().getTimeMult());
             fulfillOrderAmount = 3;
             orderValue = 30;
         }
