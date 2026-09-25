@@ -1,2 +1,14 @@
-~|~Easy
-What is 1+1?|2
+~|~ Easy Questions
+What type of thing holds data?|variable
+Is Python or C (generally) a faster programming language?|C
+What language is this program programmed in?|Java
+
+~|~ Medium Questions
+Who invented the World Wide Web?|Tim Berners-Lee
+What is the most common version control system?|git
+Is overloading the same as overriding?|no
+
+~|~ Hard Questions
+Does P=NP?|unknown
+What is the meaning of Life, the Universe, and Everything?|42
+C++ is a _____ of C|superset

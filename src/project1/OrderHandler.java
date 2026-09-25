@@ -135,29 +135,262 @@ public class OrderHandler
      * The bank of Science questions organized by difficulty.
      */
     private String[] scienceQuestionBank = {
-        // Your existing Science questions...
-    };
+        // easy — 0 to 32
+
+        "What planet is closest to the Sun?",
+        "What planet is known as the Red Planet?",
+        "What is the largest planet in our solar system?",
+        "What gas do humans need to breathe?",
+        "What gas do plants absorb during photosynthesis?",
+        "What is H2O commonly called?", "What is the center of an atom called?",
+        "What force pulls objects toward Earth?",
+        "What organ pumps blood through the body?",
+        "What organ is primarily responsible for breathing?",
+        "What is the basic unit of life?", "What is Earth's natural satellite?",
+        "How many bones are in the adult human body?",
+        "What is the boiling point of water at sea level in Celsius?",
+        "What is the freezing point of water in Celsius?",
+        "What star is at the center of our solar system?",
+        "What process do plants use to make food?",
+        "What part of a plant absorbs water from soil?",
+        "What is the largest organ of the human body?",
+        "What type of energy comes from the Sun?",
+        "What are animals that eat only plants called?",
+        "What are animals that eat only meat called?",
+        "What is the chemical symbol for oxygen?",
+        "What is the chemical symbol for gold?",
+        "How many planets are in our solar system?",
+        "What layer of Earth do we live on?",
+        "What is the change from liquid to gas called?",
+        "What is the change from gas to liquid called?",
+        "What is the change from solid to liquid called?",
+        "What is the change from liquid to solid called?",
+        "What instrument measures temperature?",
+        "What instrument measures air pressure?",
+        "What gas makes up most of Earth's atmosphere?",
+
+        // medium — 33 to 65
+
+        "What is the chemical symbol for sodium?",
+        "What is the chemical symbol for potassium?",
+        "What is the pH of a neutral solution?",
+        "What particle has a negative charge?",
+        "What particle has a positive charge?",
+        "What particle has no electrical charge?",
+        "What is the powerhouse of the cell?",
+        "What organelle contains DNA in most eukaryotic cells?",
+        "What process produces two identical daughter cells?",
+        "What molecule carries genetic information?",
+        "What do red blood cells transport?",
+        "What is the main function of white blood cells?",
+        "What is the SI unit of force?", "What is the SI unit of energy?",
+        "What is the SI unit of power?", "What is velocity?",
+        "What is acceleration?",
+        "What type of bond involves sharing electrons?",
+        "What type of bond involves transferring electrons?",
+        "What is the atomic number of carbon?",
+        "What is the atomic number of oxygen?",
+        "What is the chemical formula for carbon dioxide?",
+        "What is the chemical formula for table salt?", "What is an ecosystem?",
+        "What is a food chain?", "What is the role of decomposers?",
+        "What is biodiversity?",
+
+        // hard — 66 to 99
+
+        "What is the SI unit of mass?",
+        "What type of energy does a moving object have?",
+        "What type of energy is stored energy?",
+        "What is the SI unit of electrical resistance?",
+        "What law relates voltage, current, and resistance?",
+        "What process generates electricity from changing magnetic fields?",
+        "What quantity measures disorder in a system?",
+        "What type of reaction releases energy?",
+        "What type of reaction absorbs energy?",
+        "What is the minimum energy needed to start a reaction called?",
+        "What substance speeds up a chemical reaction without being consumed?",
+        "What is the unit of molarity?", "What is Avogadro's number?",
+        "What do you call atoms of the same element with different numbers of neutrons?",
+        "What is the time required for half of a radioactive sample to decay called?",
+        "What process describes the survival of organisms with advantageous traits?",
+        "What process causes random changes in allele frequencies?",
+        "What process moves alleles between populations?",
+        "What is a change in DNA called?", "What process copies DNA?",
+        "What process makes RNA from DNA?",
+        "What process makes proteins from mRNA?",
+        "What process breaks down glucose to produce ATP?",
+        "What molecule is the main energy carrier in cells?",
+        "What process maintains stable internal conditions?",
+        "What is the functional unit of the kidney?",
+        "What structures in the lungs are responsible for gas exchange?",
+        "What pigment allows plants to absorb light?",
+        "What effect causes a change in observed frequency due to motion?",
+        "What is the SI unit of energy?", "What is the SI unit of power?",
+        "What is the SI unit of force?",
+        "What is the SI unit of electric charge?",
+        "What is the SI unit of frequency?" };
 
     /**
      * The bank of answers corresponding to the Science question bank.
      */
     private String[] scienceAnswerBank = {
-        // Your existing Science answers...
-    };
+        // easy — 0 to 32
+
+        "Mercury", "Mars", "Jupiter", "Oxygen", "Carbon dioxide", "Water",
+        "Nucleus", "Gravity", "Heart", "Lungs", "Cell", "Moon", "206", "100",
+        "0", "Sun", "Photosynthesis", "Roots", "Skin", "Solar energy",
+        "Herbivores", "Carnivores", "O", "Au", "8", "Crust", "Evaporation",
+        "Condensation", "Melting", "Freezing", "Thermometer", "Barometer",
+        "Nitrogen",
+
+        // medium — 33 to 65
+
+        "Na", "K", "Seven", "Electron", "Proton", "Neutron", "Mitochondria",
+        "Nucleus", "Mitosis", "DNA", "Oxygen", "Fight infection", "Newton",
+        "Joule", "Watt", "Velocity", "Acceleration", "Covalent", "Ionic", "6",
+        "8", "Carbon dioxide", "Sodium chloride", "Ecosystem", "Food chain",
+        "Decomposers", "Biodiversity",
+
+        // hard — 66 to 99
+
+        "Kilogram", "Kinetic", "Potential", "Ohm", "Ohm's law", "Induction",
+        "Entropy", "Exothermic", "Endothermic", "Activation", "Catalyst",
+        "Molar", "6.022e23", "Isotopes", "Half-life", "Selection", "Drift",
+        "Gene flow", "Mutation", "Replication", "Transcription", "Translation",
+        "Respiration", "ATP", "Homeostasis", "Nephron", "Alveoli",
+        "Chlorophyll", "Doppler", "Joule", "Watt", "Newton", "Coulomb",
+        "Hertz" };
 
     /**
      * The bank of English questions organized by difficulty.
      */
     private String[] englishQuestionBank = {
-        // Your existing English questions...
-    };
+        // easy — 0 to 32
+        "A person, place, thing, or idea is a ______.",
+        "An action or state-of-being word is a ______.",
+        "A word that describes a noun is an ______.",
+        "A word that modifies a verb, adjective, or adverb is an ______.",
+        "A word that replaces a noun is a ______.",
+        "A word that shows a relationship between words is a ______.",
+        "A word that connects words or ideas is a ______.",
+        "A group of words expressing a complete thought is a ______.",
+        "A group of sentences about a central idea is a ______.",
+        "A word with a similar meaning is a ______.",
+        "A word with an opposite meaning is an ______.",
+        "A word with multiple meanings that sound or are spelled the same is a ______.",
+        "A comparison without using like or as is a ______.",
+        "A comparison using like or as is a ______.",
+        "Repetition of beginning consonant sounds is ______.",
+        "A sentence that asks something is a ______.",
+        "A sentence that gives information is a ______.",
+        "The punctuation mark used to end a question is a ______.",
+        "The punctuation mark usually used to end a statement is a ______.",
+        "The plural of child is ______.", "The past tense of go is ______.",
+        "The plural of mouse is ______.", "The opposite of hot is ______.",
+        "The opposite of early is ______.", "A synonym for happy is ______.",
+        "A synonym for large is ______.",
+        "The central point of a text is its ______.",
+        "The name of a text is its ______.",
+        "A person or being in a story is a ______.",
+        "The time and place of a story is its ______.",
+        "The sequence of events in a story is its ______.",
+        "Conversation between characters is called ______.",
+        "The person or voice telling a story is the ______.",
+        // medium — 33 to 65
+        "Giving human qualities to nonhuman things is ______.",
+        "Extreme exaggeration is called ______.",
+        "A contrast between expectation and reality is ______.",
+        "Hints about future events are called ______.",
+        "Descriptive language that appeals to the senses is called ______.",
+        "An object or idea representing something else is a ______.",
+        "The central message of a work is its ______.",
+        "A struggle between opposing forces is a ______.",
+        "The main character of a story is the ______.",
+        "The character or force opposing the protagonist is the ______.",
+        "A point of view using I or we is ______ person.",
+        "A point of view using he, she, or they is ______ person.",
+        "The main argument of an essay is the ______.",
+        "Information that supports a claim is called ______.",
+        "The sentence stating a paragraph's main point is the ______ sentence.",
+        "The final section of an essay is the ______.",
+        "A word or phrase connecting ideas is a ______.",
+        "A clause that cannot stand alone is ______.",
+        "A clause that can stand alone is ______.",
+        "A sentence with two independent clauses is ______.",
+        "A sentence with an independent and dependent clause is ______.",
+        "Joining two independent clauses with only a comma is a comma ______.",
+        "Showing possession or omitted letters uses an ______.",
+        "A punctuation mark separating closely related independent clauses is a ______.",
+        "A punctuation mark introducing a list or explanation is a ______.",
+        "When the subject performs the action, the voice is ______.",
+        "When the subject receives the action, the voice is ______.",
+        "A phrase whose meaning is not literal is an ______.",
+        "A question asked for effect rather than an answer is ______.",
+        "The author's attitude is called ______.",
+        "The feeling created in the reader is called ______.",
+        "The reason an author writes is the author's ______.",
+        "An opposing argument is a ______.",
+        // hard — 66 to 99
+        "An appeal based on credibility or character is ______.",
+        "An appeal to emotion is ______.",
+        "An appeal based on logic and evidence is ______.",
+        "The problem that prompts a rhetorical response is the ______.",
+        "The context involving speaker, audience, purpose, and circumstances is the rhetorical ______.",
+        "The intended readers or listeners are the ______.",
+        "A category or type of writing is a ______.",
+        "Using the appropriate timing or moment is called ______.",
+        "A statement or position being argued is a ______.",
+        "The reasoning connecting evidence to a claim is the ______.",
+        "An error in reasoning is a ______.",
+        "Attacking the person instead of the argument is ______.",
+        "Misrepresenting an argument to make it easier to attack is a ______.",
+        "Presenting only two choices when more exist is a ______.",
+        "Claiming one event will inevitably lead to extreme consequences is a ______.",
+        "Using an authority as evidence without sufficient support is an ______.",
+        "Using the conclusion as support for itself is ______.",
+        "A broad conclusion based on limited evidence is a ______.",
+        "An author's word choice is called ______.",
+        "The arrangement of words and phrases is ______.",
+        "The associations a word carries are its ______.",
+        "The literal dictionary meaning of a word is its ______.",
+        "Placing contrasting ideas or images together is ______.",
+        "A statement that appears contradictory but may reveal truth is a ______.",
+        "Two contradictory terms placed together form an ______.",
+        "Repeating a word or phrase at the beginning of successive clauses is ______.",
+        "Using similar grammatical structures is ______.",
+        "Repeating words or ideas for emphasis is ______.",
+        "A recurring element with symbolic significance is a ______.",
+        "A recurring character, image, or situation representing a familiar pattern is an ______.",
+        "A technique presenting a character's continuous thoughts is ______.",
+        "A narrator whose account may not be trustworthy is ______.",
+        "The relationship between a text and other texts is ______.",
+        "A reference to another text, person, event, or work is an ______." };
 
     /**
      * The bank of answers corresponding to the English question bank.
      */
     private String[] englishAnswerBank = {
-        // Your existing English answers...
-    };
+        // easy — 0 to 32
+        "Noun", "Verb", "Adjective", "Adverb", "Pronoun", "Preposition",
+        "Conjunction", "Sentence", "Paragraph", "Synonym", "Antonym", "Homonym",
+        "Metaphor", "Simile", "Alliteration", "Question", "Statement",
+        "Questionmark", "Period", "Children", "Went", "Mice", "Cold", "Late",
+        "Joyful", "Big", "Mainidea", "Title", "Character", "Setting", "Plot",
+        "Dialogue", "Narrator",
+        // medium — 33 to 65
+        "Personification", "Hyperbole", "Irony", "Foreshadowing", "Imagery",
+        "Symbol", "Theme", "Conflict", "Protagonist", "Antagonist", "First",
+        "Third", "Thesis", "Evidence", "Topic", "Conclusion", "Transition",
+        "Dependent", "Independent", "Compound", "Complex", "Splice",
+        "Apostrophe", "Semicolon", "Colon", "Active", "Passive", "Idiom",
+        "Rhetorical", "Tone", "Mood", "Purpose", "Counterargument",
+        // hard — 66 to 99
+        "Ethos", "Pathos", "Logos", "Exigence", "Situation", "Audience",
+        "Genre", "Kairos", "Claim", "Warrant", "Fallacy", "Adhominem",
+        "Strawman", "Dilemma", "Slippery", "Authority", "Circular",
+        "Generalization", "Diction", "Syntax", "Connotation", "Denotation",
+        "Juxtaposition", "Paradox", "Oxymoron", "Anaphora", "Parallelism",
+        "Repetition", "Motif", "Archetype", "Consciousness", "Unreliable",
+        "Intertextuality", "Allusion" };
 
     /**
      * Handles questions loaded from a custom questions file.
