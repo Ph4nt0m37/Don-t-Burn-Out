@@ -41,7 +41,7 @@ public class ShopHandler
         boolean purchasedEquipment = InputHandler.getUserBoolInput("Would you like to purchase this equipment? (Y/N) ","That is not a valid option!");
         if (purchasedEquipment) {
             if (purchaseItem(nextEquipment)) {
-                System.out.println("Successfully purchased "+nextEquipment.toString()+"!");
+                System.out.println("Successfully purchased "+nextEquipment.toString()+"! Money: "+user.getMoney());
             }else {
                 System.out.println("You do not have enough money to purchase this item!\nPlease try again when you have enough money.");
             }

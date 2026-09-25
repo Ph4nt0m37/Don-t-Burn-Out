@@ -1,25 +1,18 @@
 package project1.Tests;
+
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
-import project1.InputHandler;
+import project1.*;
 import student.TestCase;
 
-public class InputHandlerTest
-    extends TestCase
+public class InputHandlerTest extends TestCase
 {
-    /**
-     * Sets up each test method.
-     */
     public void setUp()
     {
         InputHandler.scanner = new Scanner(
             new ByteArrayInputStream("".getBytes()));
     }
 
-
-    /**
-     * Tests getUserInput() with a normal string.
-     */
     public void testGetUserInput()
     {
         InputHandler.scanner = new Scanner(
@@ -29,207 +22,254 @@ public class InputHandlerTest
 
         assertEquals("Hello World", result);
     }
-    
-    /**
-     * Tests getUserInput() when the user enters a valid answer.
-     */
-    public void testGetUserInputValidAnswer()
+
+    public void testGetUserInputValidFirstAnswer()
     {
         InputHandler.scanner = new Scanner(
-            new ByteArrayInputStream("yes\n".getBytes()));
-
-        String[] validAnswers = {"yes", "no"};
+            new ByteArrayInputStream("Yes\n".getBytes()));
 
         String result = InputHandler.getUserInput(
-            "Enter yes or no: ",
-            validAnswers,
-            "Invalid answer");
+            "Enter answer: ",
+            new String[] {"Yes", "No"},
+            "Invalid!");
 
-        assertEquals("yes", result);
+        assertEquals("Yes", result);
     }
 
-
-    /**
-     * Tests getUserInput() when the user enters another valid answer.
-     */
-    public void testGetUserInputSecondValidAnswer()
+    public void testGetUserInputValidSecondAnswer()
     {
         InputHandler.scanner = new Scanner(
-            new ByteArrayInputStream("no\n".getBytes()));
-
-        String[] validAnswers = {"yes", "no"};
+            new ByteArrayInputStream("No\n".getBytes()));
 
         String result = InputHandler.getUserInput(
-            "Enter yes or no: ",
-            validAnswers,
-            "Invalid answer");
+            "Enter answer: ",
+            new String[] {"Yes", "No"},
+            "Invalid!");
 
-        assertEquals("no", result);
+        assertEquals("No", result);
     }
 
+    public void testGetUserInputCaseInsensitive()
+    {
+        InputHandler.scanner = new Scanner(
+            new ByteArrayInputStream("yEs\n".getBytes()));
 
-    /**
-     * Tests getUserInput() when the user enters an invalid answer
-     * before entering a valid answer.
-     */
+        String result = InputHandler.getUserInput(
+            "Enter answer: ",
+            new String[] {"Yes", "No"},
+            "Invalid!");
+
+        assertEquals("yEs", result);
+    }
+
     public void testGetUserInputInvalidThenValid()
     {
         InputHandler.scanner = new Scanner(
-            new ByteArrayInputStream("maybe\nyes\n".getBytes()));
-
-        String[] validAnswers = {"yes", "no"};
+            new ByteArrayInputStream("Maybe\nYes\n".getBytes()));
 
         String result = InputHandler.getUserInput(
-            "Enter yes or no: ",
-            validAnswers,
-            "Invalid answer");
+            "Enter answer: ",
+            new String[] {"Yes", "No"},
+            "Invalid!");
 
-        assertEquals("yes", result);
+        assertEquals("Yes", result);
     }
 
-
-    /**
-     * Tests getUserInput() with multiple invalid answers
-     * before entering a valid answer.
-     */
-    public void testGetUserInputMultipleInvalidAnswers()
+    public void testGetUserInputMultipleInvalid()
     {
         InputHandler.scanner = new Scanner(
             new ByteArrayInputStream(
-                "maybe\nperhaps\nhello\nno\n".getBytes()));
-
-        String[] validAnswers = {"yes", "no"};
+                "Maybe\nPerhaps\nHello\nNo\n".getBytes()));
 
         String result = InputHandler.getUserInput(
-            "Enter yes or no: ",
-            validAnswers,
-            "Invalid answer");
+            "Enter answer: ",
+            new String[] {"Yes", "No"},
+            "Invalid!");
 
-        assertEquals("no", result);
+        assertEquals("No", result);
     }
 
-
-    /**
-     * Tests getUserInput() with multiple valid answers.
-     */
-    public void testGetUserInputDifferentValidAnswers()
-    {
-        InputHandler.scanner = new Scanner(
-            new ByteArrayInputStream("apple\n".getBytes()));
-
-        String[] validAnswers = {"apple", "banana", "orange"};
-
-        String result = InputHandler.getUserInput(
-            "Choose a fruit: ",
-            validAnswers,
-            "Invalid fruit");
-
-        assertEquals("apple", result);
-    }
-
-
-    /**
-     * Tests getUserIntInput() with a valid number.
-     */
     public void testGetUserIntInputValid()
     {
         InputHandler.scanner = new Scanner(
             new ByteArrayInputStream("50\n".getBytes()));
 
         int result = InputHandler.getUserIntInput(
-            "Enter number: ", 1, 100, "Invalid input");
+            "Enter number: ",
+            1,
+            100,
+            "Invalid!");
 
         assertEquals(50, result);
     }
 
-
-    /**
-     * Tests getUserIntInput() with the minimum value.
-     */
     public void testGetUserIntInputMinimum()
     {
         InputHandler.scanner = new Scanner(
             new ByteArrayInputStream("1\n".getBytes()));
 
         int result = InputHandler.getUserIntInput(
-            "Enter number: ", 1, 100, "Invalid input");
+            "Enter number: ",
+            1,
+            100,
+            "Invalid!");
 
         assertEquals(1, result);
     }
 
-
-    /**
-     * Tests getUserIntInput() with the maximum value.
-     */
     public void testGetUserIntInputMaximum()
     {
         InputHandler.scanner = new Scanner(
             new ByteArrayInputStream("100\n".getBytes()));
 
         int result = InputHandler.getUserIntInput(
-            "Enter number: ", 1, 100, "Invalid input");
+            "Enter number: ",
+            1,
+            100,
+            "Invalid!");
 
         assertEquals(100, result);
     }
 
-
-    /**
-     * Tests getUserIntInput() with a value below the minimum.
-     */
     public void testGetUserIntInputBelowMinimum()
     {
         InputHandler.scanner = new Scanner(
             new ByteArrayInputStream("-1\n50\n".getBytes()));
 
         int result = InputHandler.getUserIntInput(
-            "Enter number: ", 1, 100, "Invalid input");
+            "Enter number: ",
+            1,
+            100,
+            "Invalid!");
 
         assertEquals(50, result);
     }
 
-
-    /**
-     * Tests getUserIntInput() with a value above the maximum.
-     */
     public void testGetUserIntInputAboveMaximum()
     {
         InputHandler.scanner = new Scanner(
             new ByteArrayInputStream("101\n50\n".getBytes()));
 
         int result = InputHandler.getUserIntInput(
-            "Enter number: ", 1, 100, "Invalid input");
+            "Enter number: ",
+            1,
+            100,
+            "Invalid!");
 
         assertEquals(50, result);
     }
 
-
-    /**
-     * Tests getUserIntInput() with non-numeric input.
-     */
     public void testGetUserIntInputNonNumeric()
     {
         InputHandler.scanner = new Scanner(
             new ByteArrayInputStream("abc\n50\n".getBytes()));
 
         int result = InputHandler.getUserIntInput(
-            "Enter number: ", 1, 100, "Invalid input");
+            "Enter number: ",
+            1,
+            100,
+            "Invalid!");
 
         assertEquals(50, result);
     }
 
-
-    /**
-     * Tests getUserIntInput() with multiple invalid inputs.
-     */
-    public void testGetUserIntInputMultipleInvalidInputs()
+    public void testGetUserIntInputMultipleInvalid()
     {
         InputHandler.scanner = new Scanner(
             new ByteArrayInputStream(
                 "abc\n-5\n101\n42\n".getBytes()));
 
         int result = InputHandler.getUserIntInput(
-            "Enter number: ", 1, 100, "Invalid input");
+            "Enter number: ",
+            0,
+            99,
+            "Invalid!");
 
         assertEquals(42, result);
+    }
+
+    public void testGetUserBoolInputYes()
+    {
+        InputHandler.scanner = new Scanner(
+            new ByteArrayInputStream("Yes\n".getBytes()));
+
+        boolean result = InputHandler.getUserBoolInput(
+            "Continue? ",
+            "Invalid!");
+
+        assertTrue(result);
+    }
+
+    public void testGetUserBoolInputY()
+    {
+        InputHandler.scanner = new Scanner(
+            new ByteArrayInputStream("Y\n".getBytes()));
+
+        boolean result = InputHandler.getUserBoolInput(
+            "Continue? ",
+            "Invalid!");
+
+        assertTrue(result);
+    }
+
+    public void testGetUserBoolInputNo()
+    {
+        InputHandler.scanner = new Scanner(
+            new ByteArrayInputStream("No\n".getBytes()));
+
+        boolean result = InputHandler.getUserBoolInput(
+            "Continue? ",
+            "Invalid!");
+
+        assertFalse(result);
+    }
+
+    public void testGetUserBoolInputN()
+    {
+        InputHandler.scanner = new Scanner(
+            new ByteArrayInputStream("N\n".getBytes()));
+
+        boolean result = InputHandler.getUserBoolInput(
+            "Continue? ",
+            "Invalid!");
+
+        assertFalse(result);
+    }
+
+    public void testGetUserBoolInputCaseInsensitive()
+    {
+        InputHandler.scanner = new Scanner(
+            new ByteArrayInputStream("yEs\n".getBytes()));
+
+        boolean result = InputHandler.getUserBoolInput(
+            "Continue? ",
+            "Invalid!");
+
+        assertTrue(result);
+    }
+
+    public void testGetUserBoolInputInvalidThenValid()
+    {
+        InputHandler.scanner = new Scanner(
+            new ByteArrayInputStream("Maybe\nY\n".getBytes()));
+
+        boolean result = InputHandler.getUserBoolInput(
+            "Continue? ",
+            "Invalid!");
+
+        assertTrue(result);
+    }
+
+    public void testGetUserBoolInputMultipleInvalid()
+    {
+        InputHandler.scanner = new Scanner(
+            new ByteArrayInputStream(
+                "Maybe\nPerhaps\nHello\nN\n".getBytes()));
+
+        boolean result = InputHandler.getUserBoolInput(
+            "Continue? ",
+            "Invalid!");
+
+        assertFalse(result);
     }
 }

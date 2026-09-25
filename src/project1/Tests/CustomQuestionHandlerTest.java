@@ -1,305 +1,150 @@
 package project1.Tests;
 
+import java.io.File;
+import java.io.FileWriter;
+import project1.*;
+import java.io.FileNotFoundException;
+
 import student.TestCase;
 
-/**
- * Tests for the OrderHandler class.
- *
- * @author Paulo Korowajczuk Nader
- * @version 09.24.2026
- */
-public class OrderHandlerTest
-    extends TestCase
+public class CustomQuestionHandlerTest extends TestCase
 {
-    private ShopHandler shopHandler;
-    private OrderHandler orderHandler;
+    private File testFile;
 
-
-    /**
-     * Sets up each test.
-     */
-    public void setUp()
+    public void setUp() throws Exception
     {
-        shopHandler = new ShopHandler();
-        orderHandler = new OrderHandler(shopHandler);
+        testFile = new File("testQuestions.txt");
+
+        FileWriter writer = new FileWriter(testFile);
+
+        writer.write("~|~Easy\n");
+        writer.write("What is 1+1?|2\n");
+        writer.write("What color is the sky?|blue\n");
+        writer.write("\n");
+
+        writer.write("~|~Medium\n");
+        writer.write("What is 5*5?|25\n");
+        writer.write("What is the capital of France?|Paris\n");
+
+        writer.write("~|~Hard\n");
+        writer.write("What is 12*12?|144\n");
+        writer.write("What is the square root of 81?|9\n");
+
+        writer.close();
     }
 
-
-    /**
-     * Tests generateOrder() with easy difficulty.
-     */
-    public void testGenerateEasyOrder()
+    public void tearDown()
     {
-        Order order = orderHandler.generateOrder(0);
-
-        assertNotNull(order);
-        assertEquals(1, order.getFulfillOrderAmount());
-        assertEquals(10, order.getOrderValue());
-        assertEquals(0, order.getQuestionDifficulty());
-
-        assertNotNull(order.getOrderType());
+        if (testFile != null && testFile.exists()) {
+            testFile.delete();
+        }
     }
 
-
-    /**
-     * Tests generateOrder() with medium difficulty.
-     */
-    public void testGenerateMediumOrder()
+    public void testEasyQuestion()
+        throws Exception
     {
-        Order order = orderHandler.generateOrder(1);
+        CustomQuestionHandler handler =
+            new CustomQuestionHandler("testQuestions.txt");
 
-        assertNotNull(order);
-        assertEquals(2, order.getFulfillOrderAmount());
-        assertEquals(20, order.getOrderValue());
-        assertEquals(1, order.getQuestionDifficulty());
+        String[] result = handler.getQuestionAndAnswer(0);
 
-        assertNotNull(order.getOrderType());
-    }
-
-
-    /**
-     * Tests generateOrder() with hard difficulty.
-     */
-    public void testGenerateHardOrder()
-    {
-        Order order = orderHandler.generateOrder(2);
-
-        assertNotNull(order);
-        assertEquals(3, order.getFulfillOrderAmount());
-        assertEquals(30, order.getOrderValue());
-        assertEquals(2, order.getQuestionDifficulty());
-
-        assertNotNull(order.getOrderType());
-    }
-
-
-    /**
-     * Tests generateOrder() with a difficulty greater than 2.
-     * This should use the hard difficulty branch.
-     */
-    public void testGenerateOrderHighDifficulty()
-    {
-        Order order = orderHandler.generateOrder(3);
-
-        assertNotNull(order);
-        assertEquals(3, order.getFulfillOrderAmount());
-        assertEquals(30, order.getOrderValue());
-        assertEquals(3, order.getQuestionDifficulty());
-    }
-
-
-    /**
-     * Tests generateOrder() with a negative difficulty.
-     * This should use the easy difficulty branch.
-     */
-    public void testGenerateOrderNegativeDifficulty()
-    {
-        Order order = orderHandler.generateOrder(-1);
-
-        assertNotNull(order);
-        assertEquals(1, order.getFulfillOrderAmount());
-        assertEquals(10, order.getOrderValue());
-        assertEquals(-1, order.getQuestionDifficulty());
-    }
-
-
-    /**
-     * Tests setting the subject to Math and getting a question.
-     */
-    public void testMathEasyQuestion()
-    {
-        orderHandler.setSubject("Math");
-
-        Order order = orderHandler.generateOrder(0);
-        orderHandler.nextQuestion();
-
-        assertNotNull(order);
-        assertNotNull(orderHandler.getCurrentQuestion());
-        assertNotNull(orderHandler.getCurrentQuestionAnswer());
+        assertNotNull(result);
+        assertEquals(2, result.length);
 
         assertTrue(
-            orderHandler.getCurrentQuestion().startsWith("What")
-                || orderHandler.getCurrentQuestion().startsWith("Solve")
-                || orderHandler.getCurrentQuestion().startsWith("Simplify")
-                || orderHandler.getCurrentQuestion().startsWith("Convert"));
+            result[0].equals("What is 1+1?")
+            || result[0].equals("What color is the sky?"));
+
+        assertTrue(
+            result[1].equals("2")
+            || result[1].equals("blue"));
     }
 
-
-    /**
-     * Tests the Math medium question branch.
-     */
-    public void testMathMediumQuestion()
+    public void testMediumQuestion()
+        throws Exception
     {
-        orderHandler.setSubject("Math");
+        CustomQuestionHandler handler =
+            new CustomQuestionHandler("testQuestions.txt");
 
-        orderHandler.generateOrder(1);
-        orderHandler.nextQuestion();
+        String[] result = handler.getQuestionAndAnswer(1);
 
-        assertNotNull(orderHandler.getCurrentQuestion());
-        assertNotNull(orderHandler.getCurrentQuestionAnswer());
+        assertNotNull(result);
+        assertEquals(2, result.length);
+
+        assertTrue(
+            result[0].equals("What is 5*5?")
+            || result[0].equals("What is the capital of France?"));
     }
 
-
-    /**
-     * Tests the Math hard question branch.
-     */
-    public void testMathHardQuestion()
+    public void testHardQuestion()
+        throws Exception
     {
-        orderHandler.setSubject("Math");
+        CustomQuestionHandler handler =
+            new CustomQuestionHandler("testQuestions.txt");
 
-        orderHandler.generateOrder(2);
-        orderHandler.nextQuestion();
+        String[] result = handler.getQuestionAndAnswer(2);
 
-        assertNotNull(orderHandler.getCurrentQuestion());
-        assertNotNull(orderHandler.getCurrentQuestionAnswer());
+        assertNotNull(result);
+        assertEquals(2, result.length);
+
+        assertTrue(
+            result[0].equals("What is 12*12?")
+            || result[0].equals("What is the square root of 81?"));
     }
 
-
-    /**
-     * Tests setting the subject to Science.
-     */
-    public void testScienceQuestion()
+    public void testNegativeDifficulty()
+        throws Exception
     {
-        orderHandler.setSubject("Science");
+        CustomQuestionHandler handler =
+            new CustomQuestionHandler("testQuestions.txt");
 
-        orderHandler.generateOrder(0);
-        orderHandler.nextQuestion();
+        String[] result = handler.getQuestionAndAnswer(-1);
 
-        assertNotNull(orderHandler.getCurrentQuestion());
-        assertNotNull(orderHandler.getCurrentQuestionAnswer());
+        assertNotNull(result);
+        assertEquals(2, result.length);
+
+        assertTrue(
+            result[0].equals("What is 1+1?")
+            || result[0].equals("What color is the sky?"));
     }
 
-
-    /**
-     * Tests Science medium questions.
-     */
-    public void testScienceMediumQuestion()
+    public void testHighDifficulty()
+        throws Exception
     {
-        orderHandler.setSubject("Science");
+        CustomQuestionHandler handler =
+            new CustomQuestionHandler("testQuestions.txt");
 
-        orderHandler.generateOrder(1);
-        orderHandler.nextQuestion();
+        String[] result = handler.getQuestionAndAnswer(3);
 
-        assertNotNull(orderHandler.getCurrentQuestion());
-        assertNotNull(orderHandler.getCurrentQuestionAnswer());
+        assertNotNull(result);
+        assertEquals(2, result.length);
+
+        assertTrue(
+            result[0].equals("What is 1+1?")
+            || result[0].equals("What color is the sky?"));
     }
 
-
-    /**
-     * Tests Science hard questions.
-     */
-    public void testScienceHardQuestion()
+    public void testBlankLines()
+        throws Exception
     {
-        orderHandler.setSubject("Science");
+        CustomQuestionHandler handler =
+            new CustomQuestionHandler("testQuestions.txt");
 
-        orderHandler.generateOrder(2);
-        orderHandler.nextQuestion();
+        // The blank line should be ignored.
+        String[] easy = handler.getQuestionAndAnswer(0);
 
-        assertNotNull(orderHandler.getCurrentQuestion());
-        assertNotNull(orderHandler.getCurrentQuestionAnswer());
+        assertNotNull(easy);
+        assertEquals(2, easy.length);
     }
 
-
-    /**
-     * Tests setting the subject to English.
-     */
-    public void testEnglishQuestion()
+    public void testFileNotFound()
     {
-        orderHandler.setSubject("English");
-
-        orderHandler.generateOrder(0);
-        orderHandler.nextQuestion();
-
-        assertNotNull(orderHandler.getCurrentQuestion());
-        assertNotNull(orderHandler.getCurrentQuestionAnswer());
-    }
-
-
-    /**
-     * Tests English medium questions.
-     */
-    public void testEnglishMediumQuestion()
-    {
-        orderHandler.setSubject("English");
-
-        orderHandler.generateOrder(1);
-        orderHandler.nextQuestion();
-
-        assertNotNull(orderHandler.getCurrentQuestion());
-        assertNotNull(orderHandler.getCurrentQuestionAnswer());
-    }
-
-
-    /**
-     * Tests English hard questions.
-     */
-    public void testEnglishHardQuestion()
-    {
-        orderHandler.setSubject("English");
-
-        orderHandler.generateOrder(2);
-        orderHandler.nextQuestion();
-
-        assertNotNull(orderHandler.getCurrentQuestion());
-        assertNotNull(orderHandler.getCurrentQuestionAnswer());
-    }
-
-
-    /**
-     * Tests getCurrentQuestion() after nextQuestion().
-     */
-    public void testGetCurrentQuestion()
-    {
-        orderHandler.setSubject("Math");
-        orderHandler.generateOrder(0);
-        orderHandler.nextQuestion();
-
-        String question = orderHandler.getCurrentQuestion();
-
-        assertNotNull(question);
-        assertTrue(question.length() > 0);
-    }
-
-
-    /**
-     * Tests getCurrentQuestionAnswer() after nextQuestion().
-     */
-    public void testGetCurrentQuestionAnswer()
-    {
-        orderHandler.setSubject("Math");
-        orderHandler.generateOrder(0);
-        orderHandler.nextQuestion();
-
-        String answer = orderHandler.getCurrentQuestionAnswer();
-
-        assertNotNull(answer);
-        assertTrue(answer.length() > 0);
-    }
-
-
-    /**
-     * Tests changing the subject.
-     */
-    public void testSetSubject()
-    {
-        orderHandler.setSubject("Math");
-
-        orderHandler.generateOrder(0);
-        orderHandler.nextQuestion();
-
-        String mathQuestion =
-            orderHandler.getCurrentQuestion();
-
-        assertNotNull(mathQuestion);
-
-        orderHandler.setSubject("Science");
-
-        orderHandler.generateOrder(0);
-        orderHandler.nextQuestion();
-
-        String scienceQuestion =
-            orderHandler.getCurrentQuestion();
-
-        assertNotNull(scienceQuestion);
+        try {
+            new CustomQuestionHandler("fileThatDoesNotExist.txt");
+            fail("Expected FileNotFoundException");
+        }
+        catch (FileNotFoundException e) {
+            // Expected exception
+        }
     }
 }

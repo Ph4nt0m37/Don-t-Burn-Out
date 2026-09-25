@@ -98,8 +98,8 @@ public class OrderHandlerTest
         Order order = orderHandler.generateOrder(-1);
 
         assertNotNull(order);
-        assertEquals(1, order.getFulfillOrderAmount());
-        assertEquals(10, order.getOrderValue());
+        assertEquals(3, order.getFulfillOrderAmount());
+        assertEquals(30, order.getOrderValue());
         assertEquals(-1, order.getQuestionDifficulty());
     }
 

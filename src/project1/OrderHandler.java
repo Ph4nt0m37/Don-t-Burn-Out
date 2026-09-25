@@ -1,5 +1,7 @@
 package project1;
 
+import java.util.Random;
+
 public class OrderHandler
 {
     private Order currentOrder;
@@ -425,42 +427,25 @@ public class OrderHandler
 
     public void nextQuestion()
     {
-        int start;
-        int end;
-
-        if (currentOrder.getQuestionDifficulty() >= 2)
-        {
-            // hard questions: 66–99
-            start = 66;
-            end = 99;
-        }
-        else if (currentOrder.getQuestionDifficulty() == 1)
-        {
-            // medium questions: 33–65
-            start = 33;
-            end = 65;
-        }
-        else
-        {
-            // easy questions: 0-32
-            start = 0;
-            end = 32;
-        }
-
-        int index = start + (int)(Math.random() * (end - start + 1));
 
         if (subject.equalsIgnoreCase("Math"))
         {
+            Random random = new Random(); 
+            int index = random.nextInt(mathQuestionBank.length/3)+(mathQuestionBank.length/3*currentOrder.getQuestionDifficulty());
             currentQuestion = mathQuestionBank[index];
             currentAnswer = mathAnswerBank[index];
         }
         else if (subject.equalsIgnoreCase("Science"))
         {
+            Random random = new Random(); 
+            int index = random.nextInt(scienceQuestionBank.length/3)+(scienceQuestionBank.length/3*currentOrder.getQuestionDifficulty());
             currentQuestion = scienceQuestionBank[index];
             currentAnswer = scienceAnswerBank[index];
         }
         else if (subject.equalsIgnoreCase("English"))
         {
+            Random random = new Random(); 
+            int index = random.nextInt(englishQuestionBank.length/3)+(englishQuestionBank.length/3*currentOrder.getQuestionDifficulty());
             currentQuestion = englishQuestionBank[index];
             currentAnswer = englishAnswerBank[index];
         }else if (subject.equalsIgnoreCase("Custom")) {
