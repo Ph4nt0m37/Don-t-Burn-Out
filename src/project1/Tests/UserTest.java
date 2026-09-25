@@ -9,7 +9,8 @@ import student.TestCase;
  * @author Isabella Zhang
  * @version 2026.09.18
  */
-public class UserTest extends TestCase
+public class UserTest
+    extends TestCase
 {
     private User user;
 

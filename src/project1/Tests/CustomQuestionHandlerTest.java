@@ -7,11 +7,13 @@ import java.io.FileNotFoundException;
 
 import student.TestCase;
 
-public class CustomQuestionHandlerTest extends TestCase
+public class CustomQuestionHandlerTest
+    extends TestCase
 {
     private File testFile;
 
-    public void setUp() throws Exception
+    public void setUp()
+        throws Exception
     {
         testFile = new File("testQuestions.txt");
 
@@ -33,12 +35,15 @@ public class CustomQuestionHandlerTest extends TestCase
         writer.close();
     }
 
+
     public void tearDown()
     {
-        if (testFile != null && testFile.exists()) {
+        if (testFile != null && testFile.exists())
+        {
             testFile.delete();
         }
     }
+
 
     public void testEasyQuestion()
         throws Exception
@@ -53,12 +58,11 @@ public class CustomQuestionHandlerTest extends TestCase
 
         assertTrue(
             result[0].equals("What is 1+1?")
-            || result[0].equals("What color is the sky?"));
+                || result[0].equals("What color is the sky?"));
 
-        assertTrue(
-            result[1].equals("2")
-            || result[1].equals("blue"));
+        assertTrue(result[1].equals("2") || result[1].equals("blue"));
     }
+
 
     public void testMediumQuestion()
         throws Exception
@@ -73,8 +77,9 @@ public class CustomQuestionHandlerTest extends TestCase
 
         assertTrue(
             result[0].equals("What is 5*5?")
-            || result[0].equals("What is the capital of France?"));
+                || result[0].equals("What is the capital of France?"));
     }
+
 
     public void testHardQuestion()
         throws Exception
@@ -89,8 +94,9 @@ public class CustomQuestionHandlerTest extends TestCase
 
         assertTrue(
             result[0].equals("What is 12*12?")
-            || result[0].equals("What is the square root of 81?"));
+                || result[0].equals("What is the square root of 81?"));
     }
+
 
     public void testNegativeDifficulty()
         throws Exception
@@ -105,8 +111,9 @@ public class CustomQuestionHandlerTest extends TestCase
 
         assertTrue(
             result[0].equals("What is 1+1?")
-            || result[0].equals("What color is the sky?"));
+                || result[0].equals("What color is the sky?"));
     }
+
 
     public void testHighDifficulty()
         throws Exception
@@ -121,8 +128,9 @@ public class CustomQuestionHandlerTest extends TestCase
 
         assertTrue(
             result[0].equals("What is 1+1?")
-            || result[0].equals("What color is the sky?"));
+                || result[0].equals("What color is the sky?"));
     }
+
 
     public void testBlankLines()
         throws Exception
@@ -137,13 +145,16 @@ public class CustomQuestionHandlerTest extends TestCase
         assertEquals(2, easy.length);
     }
 
+
     public void testFileNotFound()
     {
-        try {
+        try
+        {
             new CustomQuestionHandler("fileThatDoesNotExist.txt");
             fail("Expected FileNotFoundException");
         }
-        catch (FileNotFoundException e) {
+        catch (FileNotFoundException e)
+        {
             // Expected exception
         }
     }

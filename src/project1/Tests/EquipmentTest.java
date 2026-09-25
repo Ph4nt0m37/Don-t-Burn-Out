@@ -3,7 +3,8 @@ package project1.Tests;
 import project1.*;
 import student.TestCase;
 
-public class EquipmentTest extends TestCase
+public class EquipmentTest
+    extends TestCase
 {
     public void testStove100()
     {
@@ -18,6 +19,7 @@ public class EquipmentTest extends TestCase
         assertEquals("Stove 100", equipment.toString());
     }
 
+
     public void testStove250()
     {
         Equipment equipment = Equipment.STOVE250;
@@ -30,6 +32,7 @@ public class EquipmentTest extends TestCase
         assertEquals(1.25, equipment.getTimeMult(), 0.001);
         assertEquals("Stove 250", equipment.toString());
     }
+
 
     public void testStove500()
     {
@@ -44,6 +47,7 @@ public class EquipmentTest extends TestCase
         assertEquals("Stove 500", equipment.toString());
     }
 
+
     public void testStove750()
     {
         Equipment equipment = Equipment.STOVE750;
@@ -56,6 +60,7 @@ public class EquipmentTest extends TestCase
         assertEquals(1.75, equipment.getTimeMult(), 0.001);
         assertEquals("Stove 750", equipment.toString());
     }
+
 
     public void testStove1000()
     {
@@ -70,32 +75,26 @@ public class EquipmentTest extends TestCase
         assertEquals("Stove 1000", equipment.toString());
     }
 
+
     public void testEquipmentOrder()
     {
         assertEquals(4, Equipment.equipmentOrder.size());
 
-        assertEquals(
-            Equipment.STOVE250,
-            Equipment.equipmentOrder.get(0));
+        assertEquals(Equipment.STOVE250, Equipment.equipmentOrder.get(0));
 
-        assertEquals(
-            Equipment.STOVE500,
-            Equipment.equipmentOrder.get(1));
+        assertEquals(Equipment.STOVE500, Equipment.equipmentOrder.get(1));
 
-        assertEquals(
-            Equipment.STOVE750,
-            Equipment.equipmentOrder.get(2));
+        assertEquals(Equipment.STOVE750, Equipment.equipmentOrder.get(2));
 
-        assertEquals(
-            Equipment.STOVE1000,
-            Equipment.equipmentOrder.get(3));
+        assertEquals(Equipment.STOVE1000, Equipment.equipmentOrder.get(3));
     }
+
 
     public void testEquipmentOrderDoesNotContainStove100()
     {
-        assertFalse(
-            Equipment.equipmentOrder.contains(Equipment.STOVE100));
+        assertFalse(Equipment.equipmentOrder.contains(Equipment.STOVE100));
     }
+
 
     public void testEnumValues()
     {
@@ -109,26 +108,17 @@ public class EquipmentTest extends TestCase
         assertEquals(Equipment.STOVE1000, values[4]);
     }
 
+
     public void testValueOf()
     {
-        assertEquals(
-            Equipment.STOVE100,
-            Equipment.valueOf("STOVE100"));
+        assertEquals(Equipment.STOVE100, Equipment.valueOf("STOVE100"));
 
-        assertEquals(
-            Equipment.STOVE250,
-            Equipment.valueOf("STOVE250"));
+        assertEquals(Equipment.STOVE250, Equipment.valueOf("STOVE250"));
 
-        assertEquals(
-            Equipment.STOVE500,
-            Equipment.valueOf("STOVE500"));
+        assertEquals(Equipment.STOVE500, Equipment.valueOf("STOVE500"));
 
-        assertEquals(
-            Equipment.STOVE750,
-            Equipment.valueOf("STOVE750"));
+        assertEquals(Equipment.STOVE750, Equipment.valueOf("STOVE750"));
 
-        assertEquals(
-            Equipment.STOVE1000,
-            Equipment.valueOf("STOVE1000"));
+        assertEquals(Equipment.STOVE1000, Equipment.valueOf("STOVE1000"));
     }
 }

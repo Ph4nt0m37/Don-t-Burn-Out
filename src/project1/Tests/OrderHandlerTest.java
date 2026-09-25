@@ -15,7 +15,6 @@ public class OrderHandlerTest
     private ShopHandler shopHandler;
     private OrderHandler orderHandler;
 
-
     /**
      * Sets up each test.
      */
@@ -75,8 +74,8 @@ public class OrderHandlerTest
 
 
     /**
-     * Tests generateOrder() with a difficulty greater than 2.
-     * This should use the hard difficulty branch.
+     * Tests generateOrder() with a difficulty greater than 2. This should use
+     * the hard difficulty branch.
      */
     public void testGenerateOrderHighDifficulty()
     {
@@ -90,8 +89,8 @@ public class OrderHandlerTest
 
 
     /**
-     * Tests generateOrder() with a negative difficulty.
-     * This should use the easy difficulty branch.
+     * Tests generateOrder() with a negative difficulty. This should use the
+     * easy difficulty branch.
      */
     public void testGenerateOrderNegativeDifficulty()
     {
@@ -288,8 +287,7 @@ public class OrderHandlerTest
         orderHandler.generateOrder(0);
         orderHandler.nextQuestion();
 
-        String mathQuestion =
-            orderHandler.getCurrentQuestion();
+        String mathQuestion = orderHandler.getCurrentQuestion();
 
         assertNotNull(mathQuestion);
 
@@ -298,8 +296,7 @@ public class OrderHandlerTest
         orderHandler.generateOrder(0);
         orderHandler.nextQuestion();
 
-        String scienceQuestion =
-            orderHandler.getCurrentQuestion();
+        String scienceQuestion = orderHandler.getCurrentQuestion();
 
         assertNotNull(scienceQuestion);
     }
