@@ -1,4 +1,5 @@
-package project1;
+package project1.Tests;
+import project1.Order;
 import student.TestCase;
 
 public class OrderTest

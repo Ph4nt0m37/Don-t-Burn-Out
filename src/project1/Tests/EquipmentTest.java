@@ -1,5 +1,6 @@
-package project1;
-import student.testCase;
+package project1.Tests;
+import project1.Equipment;
+import student.TestCase;
 
 public class EquipmentTest extends TestCase
 {
@@ -27,6 +28,6 @@ public class EquipmentTest extends TestCase
      */
     public void testGetPerkDescription()
     {
-        assertEquals("Increases order value", equipment.getValue());
+        assertEquals("Increases order value", equipment.getPerkDescription());
     }
 }

@@ -1,5 +1,6 @@
-package project1;
+package project1.Tests;
 
+import project1.User;
 import student.TestCase;
 
 /**
@@ -17,7 +18,7 @@ public class UserTest extends TestCase
      */
     public void setUp()
     {
-        user = new User();
+        user = new User("John");
     }
 
 

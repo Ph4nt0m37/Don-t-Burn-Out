@@ -397,13 +397,13 @@ public class OrderHandler
         }
         else if (questionDifficulty == 1)
         {
-            orderTime = 45;
+            orderTime = 50;
             fulfillOrderAmount = 2;
             orderValue = 20;
         }
         else
         {
-            orderTime = 30;
+            orderTime = 40;
             fulfillOrderAmount = 3;
             orderValue = 30;
         }

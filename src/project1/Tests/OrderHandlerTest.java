@@ -1,4 +1,6 @@
-package project1;
+package project1.Tests;
+import project1.Order;
+import project1.OrderHandler;
 import student.TestCase;
 
 public class OrderHandlerTest extends TestCase

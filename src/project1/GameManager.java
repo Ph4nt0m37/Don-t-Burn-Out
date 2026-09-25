@@ -60,10 +60,16 @@ public class GameManager
         System.out.println("Ok, you can get "+maxWrongAnswers+" questions wrong\nbefore the game ends.");
         System.out.println("\nWell would you look at the time! You restaurant is just about to open!\nGood Luck!");
         
-        int numOrdersCompleted = 0;
-        
         //ask question/start game loop.
+        startGameLoop();
+    }
+    
+    private static void startGameLoop() {
+        int numOrdersCompleted = 0;
         while (user.getNumFailedQuestions()<=maxWrongAnswers) {
+            if (numOrdersCompleted % 5 == 0 && numOrdersCompleted != 0) {
+                //System.out.println("")
+            }
             if (questionDifficulty < 2 && numOrdersCompleted % Math.max(5, maxWrongAnswers) == 0 && numOrdersCompleted!=0) {
                 questionDifficulty++;
                 System.out.println("Question Difficulty Increased!");
@@ -73,7 +79,12 @@ public class GameManager
             orderHandler.nextQuestion();
             while (currentOrder.getFulfillOrderAmount()>0 && user.getNumFailedQuestions()<=maxWrongAnswers) {
                 System.out.println("You need to answer "+currentOrder.getFulfillOrderAmount()+" more questions to fulfill this order.");
+                long startTime = System.currentTimeMillis();
                 String answer = InputHandler.getUserInput(orderHandler.getCurrentQuestion()+"\n");
+                if (System.currentTimeMillis() - startTime > currentOrder.getOrderTime()) {
+                    System.out.println("You took too long to answer the question so the customer left!");
+                    break;
+                }
                 if (answer.equalsIgnoreCase(orderHandler.getCurrentQuestionAnswer())) {
                     currentOrder.setFulfillOrderAmount(currentOrder.getFulfillOrderAmount()-1);
                     System.out.println("Correct! You just got $"+currentOrder.getOrderValue()+".");
@@ -91,5 +102,4 @@ public class GameManager
             numOrdersCompleted++;
         }
     }
-
 }

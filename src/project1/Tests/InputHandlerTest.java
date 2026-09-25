@@ -1,6 +1,7 @@
-package project1;
+package project1.Tests;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
+import project1.InputHandler;
 import student.TestCase;
 
 public class InputHandlerTest

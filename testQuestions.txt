@@ -1,0 +1,10 @@
+~|~Easy
+What is 1+1?|2
+What color is the sky?|blue
+
+~|~Medium
+What is 5*5?|25
+What is the capital of France?|Paris
+~|~Hard
+What is 12*12?|144
+What is the square root of 81?|9
