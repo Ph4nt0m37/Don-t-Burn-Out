@@ -206,7 +206,7 @@ public class GameManager
             while (currentOrder.getFulfillOrderAmount() > 0
                 && user.getNumFailedQuestions() <= maxWrongAnswers)
             {
-
+                orderHandler.nextQuestion();
                 System.out.println(
                     "You need to answer " + currentOrder.getFulfillOrderAmount()
                         + " more questions to fulfill this order.");

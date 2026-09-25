@@ -108,8 +108,7 @@ public class ShopHandler
             if (purchaseItem(nextEquipment))
             {
                 System.out.println(
-                    "Successfully purchased " + nextEquipment.toString()
-                        + "! Money: " + user.getMoney());
+                    "Successfully purchased " + nextEquipment.toString() + "!");
             }
             else
             {
